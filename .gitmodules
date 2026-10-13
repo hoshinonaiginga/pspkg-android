@@ -1,0 +1,6 @@
+[submodule "core/externals/cryptopp"]
+	path = core/externals/cryptopp
+	url = https://github.com/shadps4-emu/ext-cryptopp.git
+[submodule "core/externals/cryptopp-cmake"]
+	path = core/externals/cryptopp-cmake
+	url = https://github.com/shadps4-emu/ext-cryptopp-cmake.git
