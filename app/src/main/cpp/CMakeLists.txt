@@ -52,5 +52,9 @@ target_include_directories(pspkg PRIVATE
     "${CORE_DIR}/src"
     "${CORE_DIR}/externals"
 )
+# Crypto++ ships its own "zlib.h", so point the shim at the NDK sysroot header by full path.
+find_file(PSPKG_SYSTEM_ZLIB_H zlib.h REQUIRED)
+message(STATUS "Using system zlib header: ${PSPKG_SYSTEM_ZLIB_H}")
+target_compile_definitions(pspkg PRIVATE PSPKG_SYSTEM_ZLIB_H="${PSPKG_SYSTEM_ZLIB_H}")
 target_compile_options(pspkg PRIVATE -fexceptions -frtti -Wno-deprecated-declarations)
 target_link_libraries(pspkg PRIVATE cryptopp::cryptopp z log android)
