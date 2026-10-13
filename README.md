@@ -55,7 +55,7 @@ git clone --recursive https://github.com/hoshinonaiginga/pspkg-android
 
 You need the Android SDK and NDK 27. Without the signing variables (`PSPKG_KEYSTORE`, `PSPKG_KEYSTORE_PASSWORD`), the release APK is signed with your local debug key.
 
-Official releases are built by GitHub Actions when a `vX.Y.Z` tag is pushed.
+Official releases: publish a GitHub Release with a `vX.Y.Z` tag, and GitHub Actions builds the signed APK and attaches it automatically.
 
 ## License
 
