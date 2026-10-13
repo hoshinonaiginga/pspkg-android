@@ -58,7 +58,7 @@ public class FileBrowserActivity extends Activity {
         setContentView(R.layout.activity_browser);
         dirMode = "dir".equals(getIntent().getStringExtra(EXTRA_MODE));
         String title = getIntent().getStringExtra(EXTRA_TITLE);
-        setTitle(title != null ? title : (dirMode ? "Scegli una cartella" : "Scegli un file .pkg"));
+        setTitle(title != null ? title : getString(dirMode ? R.string.browser_title_dir : R.string.browser_title_file));
 
         pathView = findViewById(R.id.browser_path);
         useButton = findViewById(R.id.browser_use);
@@ -161,12 +161,12 @@ public class FileBrowserActivity extends Activity {
         current = dir;
         entries.clear();
         if (dir == null) {
-            pathView.setText("Memorie disponibili");
+            pathView.setText(R.string.browser_roots);
             useButton.setEnabled(false);
             List<File> roots = roots();
             for (int i = 0; i < roots.size(); i++) {
                 File r = roots.get(i);
-                String label = i == 0 ? "Memoria interna" : "Memoria esterna / SD";
+                String label = getString(i == 0 ? R.string.browser_internal : R.string.browser_external);
                 entries.add(new Entry(r, label, r.getAbsolutePath(), true));
             }
         } else {
@@ -188,7 +188,7 @@ public class FileBrowserActivity extends Activity {
                     }
                 }
             } else {
-                entries.add(new Entry(parentOf(dir), "Cartella non leggibile (permessi?)", "", true));
+                entries.add(new Entry(parentOf(dir), getString(R.string.browser_unreadable), "", true));
             }
         }
         adapter.notifyDataSetChanged();

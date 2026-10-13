@@ -14,31 +14,31 @@
             android:visibility="gone">
             <TextView
                 android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:text="Serve l'accesso a tutti i file: i PKG vengono letti direttamente dalla memoria, senza copiarli." />
+                android:text="@string/perm_text" />
             <Button android:id="@+id/btn_grant"
                 android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="Concedi accesso ai file" />
+                android:text="@string/perm_button" />
         </LinearLayout>
 
         <TextView style="@android:style/TextAppearance.Material.Subhead"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:textStyle="bold" android:text="Sorgente" />
+            android:textStyle="bold" android:text="@string/section_source" />
 
         <LinearLayout
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:orientation="horizontal">
             <Button android:id="@+id/btn_pick_file"
                 android:layout_width="0dp" android:layout_height="wrap_content"
-                android:layout_weight="1" android:text="Scegli PKG" />
+                android:layout_weight="1" android:text="@string/btn_pick_file" />
             <Button android:id="@+id/btn_pick_dir"
                 android:layout_width="0dp" android:layout_height="wrap_content"
-                android:layout_weight="1" android:text="Cartella (batch)" />
+                android:layout_weight="1" android:text="@string/btn_pick_dir" />
         </LinearLayout>
 
         <TextView android:id="@+id/txt_source"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:fontFamily="monospace" android:textSize="12sp"
-            android:text="Nessun PKG selezionato" />
+            android:text="@string/no_pkg_selected" />
 
         <TextView android:id="@+id/txt_info"
             android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -47,15 +47,15 @@
         <TextView style="@android:style/TextAppearance.Material.Subhead"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textStyle="bold" android:text="Destinazione" />
+            android:textStyle="bold" android:text="@string/section_dest" />
 
         <CheckBox android:id="@+id/chk_same_dir"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="Estrai nella stessa cartella del PKG" />
+            android:text="@string/chk_same_dir" />
 
         <Button android:id="@+id/btn_pick_out"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="Scegli cartella di output" />
+            android:text="@string/btn_pick_out" />
 
         <TextView android:id="@+id/txt_out"
             android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
 
         <Button android:id="@+id/btn_extract"
             android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="24dp" android:text="Estrai" />
+            android:layout_marginTop="24dp" android:text="@string/btn_extract" />
 
         <ProgressBar android:id="@+id/progress"
             style="@android:style/Widget.Material.ProgressBar.Horizontal"

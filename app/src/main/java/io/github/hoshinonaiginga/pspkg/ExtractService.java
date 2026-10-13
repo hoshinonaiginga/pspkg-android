@@ -71,7 +71,7 @@ public class ExtractService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         createChannel();
-        Notification n = buildProgress("Preparazione…", 0, 0, true);
+        Notification n = buildProgress(getString(R.string.notif_preparing), 0, 0, true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             startForeground(NOTIF_ID, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC);
         } else {
@@ -114,27 +114,27 @@ public class ExtractService extends Service {
             currentName = pkg.getName();
             filesDone = 0;
             filesTotal = 0;
-            phase = "Lettura header";
+            phase = getString(R.string.phase_header);
             log("[" + (i + 1) + "/" + inputs.length + "] " + pkg.getName());
 
             NativeLib.Meta meta = NativeLib.meta(pkg.getAbsolutePath());
             if (!meta.ok()) {
-                log("  ✗ Impossibile aprire: " + meta.error);
+                log(getString(R.string.log_open_failed, meta.error));
                 failed++;
                 continue;
             }
             File base = outBase != null ? new File(outBase) : pkg.getParentFile();
             File out = Util.outputDirFor(base, meta.titleId);
-            log("  Title ID: " + meta.titleId + " · " + Util.humanSize(meta.size)
-                    + " · " + meta.fileCount + " file");
-            log("  Destinazione: " + out.getAbsolutePath());
+            log(getString(R.string.log_meta, meta.titleId, Util.humanSize(meta.size), meta.fileCount));
+            log(getString(R.string.log_dest, out.getAbsolutePath()));
 
-            phase = "Decrittazione PFS e lettura indice";
+            phase = getString(R.string.phase_decrypt);
             updateNotification(true);
+            final String phaseExtract = getString(R.string.phase_extract);
             String err = NativeLib.extract(pkg.getAbsolutePath(), out.getAbsolutePath(), (done, total) -> {
                 filesDone = done;
                 filesTotal = total;
-                phase = "Estrazione file";
+                phase = phaseExtract;
                 long now = SystemClock.elapsedRealtime();
                 if (now - lastNotify > 700 || done == total) {
                     lastNotify = now;
@@ -142,18 +142,18 @@ public class ExtractService extends Service {
                 }
             });
             if (err != null) {
-                log("  ✗ Errore: " + err);
+                log(getString(R.string.log_error, err));
                 failed++;
             } else {
-                log("  ✓ Completato");
+                log(getString(R.string.log_done));
                 ok++;
             }
         }
         long secs = (SystemClock.elapsedRealtime() - start) / 1000;
         String summary = (inputs.length == 1)
-                ? (ok == 1 ? "Estrazione completata" : "Estrazione fallita")
-                : ("Batch finito: " + ok + " ok, " + failed + " falliti");
-        log("— " + summary + " in " + (secs / 60) + "m " + (secs % 60) + "s");
+                ? getString(ok == 1 ? R.string.summary_ok : R.string.summary_fail)
+                : getString(R.string.summary_batch, ok, failed);
+        log(getString(R.string.log_summary, summary, (int) (secs / 60), (int) (secs % 60)));
         phase = summary;
         running = false;
         jobActive = false;
@@ -168,7 +168,7 @@ public class ExtractService extends Service {
     }
 
     private void createChannel() {
-        NotificationChannel ch = new NotificationChannel(CHANNEL_ID, "Estrazione PKG",
+        NotificationChannel ch = new NotificationChannel(CHANNEL_ID, getString(R.string.channel_name),
                 NotificationManager.IMPORTANCE_LOW);
         nm.createNotificationChannel(ch);
     }
@@ -182,7 +182,7 @@ public class ExtractService extends Service {
     private Notification buildProgress(String text, int done, int total, boolean indeterminate) {
         Notification.Builder b = new Notification.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_stat_extract)
-                .setContentTitle(pkgCount > 1 ? ("PKG " + pkgIndex + "/" + pkgCount + " · " + currentName) : (currentName.isEmpty() ? "Estrazione PKG" : currentName))
+                .setContentTitle(pkgCount > 1 ? ("PKG " + pkgIndex + "/" + pkgCount + " · " + currentName) : (currentName.isEmpty() ? getString(R.string.notif_title_default) : currentName))
                 .setContentText(text)
                 .setOngoing(true)
                 .setOnlyAlertOnce(true)
@@ -192,7 +192,7 @@ public class ExtractService extends Service {
     }
 
     private void updateNotification(boolean indeterminate) {
-        String text = indeterminate ? phase + "…" : (filesDone + " / " + filesTotal + " file");
+        String text = indeterminate ? phase + "…" : getString(R.string.status_files, filesDone, filesTotal);
         nm.notify(NOTIF_ID, buildProgress(text, filesDone, filesTotal, indeterminate));
     }
 

@@ -18,7 +18,7 @@ final class Util {
             v /= 1024.0;
             i++;
         } while (v >= 1024 && i < units.length - 1);
-        return String.format(Locale.ITALY, "%.2f %s", v, units[i]);
+        return String.format(Locale.getDefault(), "%.2f %s", v, units[i]);
     }
 
     static boolean isPkg(File f) {

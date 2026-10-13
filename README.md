@@ -1,61 +1,63 @@
 # PS PKG Extractor (Android)
 
-Estrae e decritta i file `.pkg` PS4 (sce_sys, file system PFS, struttura completa) direttamente sul telefono Android.
+Extract and decrypt PS4 `.pkg` files (sce_sys, PFS file system, full directory tree) right on your Android phone.
 
-## Crediti
+## Credits
 
-**Questo progetto esiste grazie a [ps4-pkg-tools](https://github.com/xXJSONDeruloXx/ps4-pkg-tools) di [xXJSONDeruloXx](https://github.com/xXJSONDeruloXx).**
-Tutta la logica di estrazione e decrittazione dei PKG viene dal suo lavoro: ha isolato il core PKG dell'emulatore shadPS4 in una libreria pulita e autonoma. Questa app è "solo" il port Android: compila quel core con l'NDK e ci costruisce sopra un'interfaccia mobile. Senza il suo progetto sarebbero serviti giorni di lavoro in più.
+**This project exists thanks to [ps4-pkg-tools](https://github.com/xXJSONDeruloXx/ps4-pkg-tools) by [xXJSONDeruloXx](https://github.com/xXJSONDeruloXx).**
+All of the PKG extraction and decryption logic comes from that work, which carved the PKG core out of the shadPS4 emulator into a clean, standalone library. This app is "just" the Android port: it builds that core with the NDK and puts a mobile UI on top. Without it, this would have taken days more work.
 
-Grazie anche a:
-- **[shadPS4](https://github.com/shadps4-emu/shadPS4)**: il team dell'emulatore PS4 da cui deriva il codice originale di lettura e decrittazione dei PKG e del PFS.
-- **[Crypto++](https://github.com/weidai11/cryptopp)** (Wei Dai e contributori), per la crittografia, e **zlib**, per la decompressione.
+Thanks also to:
+- **[shadPS4](https://github.com/shadps4-emu/shadPS4)**, the PS4 emulator team behind the original PKG/PFS reading and decryption code.
+- **[Crypto++](https://github.com/weidai11/cryptopp)** (Wei Dai and contributors) for the cryptography, and **zlib** for decompression.
 
-Se l'app ti è utile, lascia una ⭐ anche a [ps4-pkg-tools](https://github.com/xXJSONDeruloXx/ps4-pkg-tools).
+If this app is useful to you, please leave a ⭐ on [ps4-pkg-tools](https://github.com/xXJSONDeruloXx/ps4-pkg-tools) too.
 
 ## Download
 
-Scarica l'APK dall'ultima [release](../../releases) (file `PS-PKG-Extractor-<versione>.apk`).
+Grab the APK from the latest [release](../../releases) (`PS-PKG-Extractor-<version>.apk`).
 
-- Richiede **Android 8.0+** su **arm64** (praticamente tutti i telefoni dal 2017 in poi).
-- Non è sul Play Store, perché Google non concede il permesso "accesso a tutti i file" a questo tipo di app.
-- Per ricevere gli aggiornamenti in automatico puoi usare [Obtainium](https://github.com/ImranR98/Obtainium) con l'URL di questo repository.
+- Requires **Android 8.0+** on **arm64** (basically every phone since 2017).
+- It is not on the Play Store: Google doesn't grant the "All files access" permission to this kind of app.
+- To get updates automatically, add this repository's URL to [Obtainium](https://github.com/ImranR98/Obtainium).
 
-## Uso
+## Usage
 
-1. Al primo avvio concedi **Accesso a tutti i file**. Serve per leggere i PKG dove sono, senza copiarli, visto che possono pesare decine di GB.
-2. **Scegli PKG** per un singolo file, oppure **Cartella (batch)** per estrarre tutti i `.pkg` di una cartella, sottocartelle comprese.
-3. Destinazione: di default `<cartella del PKG>/<TITLE ID>`, oppure una cartella a tua scelta.
-4. **Estrai**. L'estrazione gira in un servizio in primo piano con la notifica di avanzamento, quindi continua anche a schermo spento.
+1. On first launch, grant **All files access**. PKGs are read in place, without copying them, since they can be tens of GB.
+2. Tap **Pick PKG** for a single file, or **Folder (batch)** to extract every `.pkg` in a folder, subfolders included.
+3. Destination: by default `<PKG folder>/<TITLE ID>`, or any folder you choose.
+4. Tap **Extract**. Extraction runs in a foreground service with a progress notification, so it keeps going with the screen off.
 
-La fase iniziale ("Decrittazione PFS e lettura indice") non mostra una percentuale; il conteggio parte quando inizia l'estrazione dei file.
+The first phase ("Decrypting PFS and reading index") has no percentage. The file counter starts once the actual file extraction begins.
 
-## Avvertenze
+The UI is in English, with an Italian translation that is used automatically when the system language is Italian. Translations for other languages are welcome: just add a `values-<lang>/strings.xml`.
 
-- L'app **non contiene giochi, firmware o chiavi di console** e non fornisce link per scaricarli. Usala con i PKG di cui hai diritto: i tuoi dump, i tuoi homebrew, i tuoi backup.
-- Progetto non ufficiale, senza alcun legame con Sony Interactive Entertainment. "PlayStation" e "PS4" sono marchi dei rispettivi proprietari e qui sono usati solo per indicare il formato dei file.
-- Il software è fornito "così com'è", senza garanzie (vedi la licenza).
+## Disclaimer
 
-## Struttura
+- This app **does not include any games, firmware or console keys**, and does not link to any. Use it only with PKGs you have the right to use: your own dumps, homebrew, backups.
+- Unofficial project, not affiliated with Sony Interactive Entertainment. "PlayStation" and "PS4" are trademarks of their respective owners and are used here only to describe the file format.
+- The software is provided "as is", without warranty of any kind (see the license).
+
+## Project layout
 
 ```
-core/                 sorgenti C++ di ps4-pkg-tools (core shadPS4) + Crypto++ come submodule
-app/src/main/cpp/     CMake per NDK + bridge JNI (zlib = quella di sistema dell'NDK)
-app/src/main/java/    UI (MainActivity), browser file, servizio di estrazione
+core/                 C++ sources from ps4-pkg-tools (shadPS4 core) + Crypto++ as a submodule
+app/src/main/cpp/     NDK CMake build + JNI bridge (zlib = the NDK's system zlib)
+app/src/main/java/    UI (MainActivity), file browser, extraction service
 ```
 
-### Build
+### Building
 
 ```
 git clone --recursive https://github.com/hoshinonaiginga/pspkg-android
 ./gradlew assembleRelease
 ```
 
-Serve Android SDK + NDK 27. Senza le variabili di firma (`PSPKG_KEYSTORE`, `PSPKG_KEYSTORE_PASSWORD`) l'APK release viene firmato con la chiave debug locale.
+You need the Android SDK and NDK 27. Without the signing variables (`PSPKG_KEYSTORE`, `PSPKG_KEYSTORE_PASSWORD`), the release APK is signed with your local debug key.
 
-Le release ufficiali vengono buildate da GitHub Actions quando viene pubblicato un tag `vX.Y.Z`.
+Official releases are built by GitHub Actions when a `vX.Y.Z` tag is pushed.
 
-## Licenza
+## License
 
-**GPL-2.0-or-later**, come ps4-pkg-tools e shadPS4 (vedi `LICENSE`, `core/LICENSE` e `core/LICENSES/`).
-Puoi usare, modificare e ridistribuire questo software, ma le versioni modificate devono restare open source con la stessa licenza e mantenere i crediti.
+**GPL-2.0-or-later**, like ps4-pkg-tools and shadPS4 (see `LICENSE`, `core/LICENSE` and `core/LICENSES/`).
+You may use, modify and redistribute this software, but modified versions must stay open source under the same license and keep the credits.

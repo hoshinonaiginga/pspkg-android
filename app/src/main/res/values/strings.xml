@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">PS PKG Extractor</string>
+
+    <!-- Main screen -->
+    <string name="perm_text">All files access is required: PKGs are read in place, without copying them.</string>
+    <string name="perm_button">Grant file access</string>
+    <string name="section_source">Source</string>
+    <string name="btn_pick_file">Pick PKG</string>
+    <string name="btn_pick_dir">Folder (batch)</string>
+    <string name="no_pkg_selected">No PKG selected</string>
+    <string name="section_dest">Destination</string>
+    <string name="chk_same_dir">Extract next to the PKG</string>
+    <string name="btn_pick_out">Choose output folder</string>
+    <string name="btn_extract">Extract</string>
+    <string name="btn_extract_n">Extract %1$d PKGs</string>
+    <string name="btn_extracting">Extracting…</string>
+    <string name="out_same_dir">Each PKG is extracted to &lt;PKG folder&gt;/&lt;TITLE ID&gt;</string>
+    <string name="out_none">No folder chosen</string>
+    <string name="info_reading">Reading header…</string>
+    <string name="info_open_failed">⚠ Can\'t open this PKG:\n%1$s</string>
+    <string name="info_meta">Title ID:  %1$s\nSize:  %2$s\nFiles:  %3$d</string>
+    <string name="source_folder">%1$s  (folder)</string>
+    <string name="scan_searching">Looking for .pkg files…</string>
+    <string name="scan_none">No .pkg files found (subfolders included).</string>
+    <string name="scan_found">Found %1$d PKG files:</string>
+    <string name="scan_total">Total: %1$s</string>
+    <string name="dlg_need_out">Pick a destination folder first, or tick \"%1$s\".</string>
+    <string name="status_files">%1$d / %2$d files</string>
+    <string name="status_pkg_prefix">"PKG %1$d/%2$d · "</string>
+    <string name="credits_html"><![CDATA[Based on <a href="https://github.com/xXJSONDeruloXx/ps4-pkg-tools">ps4-pkg-tools</a> by <b>xXJSONDeruloXx</b> and the PKG core of <a href="https://github.com/shadps4-emu/shadPS4">shadPS4</a>.<br>Open source, GPL-2.0 · <a href="https://github.com/hoshinonaiginga/pspkg-android">source code</a>]]></string>
+
+    <!-- File browser -->
+    <string name="browser_title_file">Choose a .pkg file</string>
+    <string name="browser_title_dir">Choose a folder</string>
+    <string name="browser_title_pkg_dir">Folder with PKGs</string>
+    <string name="browser_title_out">Destination folder</string>
+    <string name="browser_roots">Available storage</string>
+    <string name="browser_internal">Internal storage</string>
+    <string name="browser_external">External storage / SD card</string>
+    <string name="browser_unreadable">Folder not readable (permissions?)</string>
+    <string name="browser_cancel">Cancel</string>
+    <string name="browser_use">Use this folder</string>
+
+    <!-- Extraction service -->
+    <string name="channel_name">PKG extraction</string>
+    <string name="notif_title_default">PKG extraction</string>
+    <string name="notif_preparing">Preparing…</string>
+    <string name="phase_starting">Starting</string>
+    <string name="phase_header">Reading header</string>
+    <string name="phase_decrypt">Decrypting PFS and reading index</string>
+    <string name="phase_extract">Extracting files</string>
+    <string name="log_open_failed">"  ✗ Can't open: %1$s"</string>
+    <string name="log_meta">"  Title ID: %1$s · %2$s · %3$d files"</string>
+    <string name="log_dest">"  Destination: %1$s"</string>
+    <string name="log_error">"  ✗ Error: %1$s"</string>
+    <string name="log_done">"  ✓ Done"</string>
+    <string name="log_summary">— %1$s in %2$dm %3$ds</string>
+    <string name="summary_ok">Extraction complete</string>
+    <string name="summary_fail">Extraction failed</string>
+    <string name="summary_batch">Batch finished: %1$d ok, %2$d failed</string>
+</resources>

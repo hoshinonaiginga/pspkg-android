@@ -18,9 +18,9 @@
         <Button android:id="@+id/browser_cancel"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="Annulla" />
+            android:text="@string/browser_cancel" />
         <Button android:id="@+id/browser_use"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="Usa questa cartella" />
+            android:text="@string/browser_use" />
     </LinearLayout>
 </LinearLayout>

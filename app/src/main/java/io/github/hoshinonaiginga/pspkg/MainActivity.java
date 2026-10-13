@@ -116,12 +116,8 @@ public class MainActivity extends Activity {
         } catch (Exception ignored) {
         }
         TextView credits = findViewById(R.id.txt_credits);
-        credits.setText(Html.fromHtml(
-                "Basato su <a href=\"https://github.com/xXJSONDeruloXx/ps4-pkg-tools\">ps4-pkg-tools</a>"
-                        + " di <b>xXJSONDeruloXx</b> e sul core PKG di"
-                        + " <a href=\"https://github.com/shadps4-emu/shadPS4\">shadPS4</a>.<br>"
-                        + "Open source, GPL-2.0 · <a href=\"https://github.com/hoshinonaiginga/pspkg-android\">codice sorgente</a>"
-                        + (version.isEmpty() ? "" : " · v" + version),
+        credits.setText(Html.fromHtml(getString(R.string.credits_html)
+                        + (version == null || version.isEmpty() ? "" : " · v" + version),
                 Html.FROM_HTML_MODE_COMPACT));
         credits.setMovementMethod(LinkMovementMethod.getInstance());
     }
@@ -167,8 +163,8 @@ public class MainActivity extends Activity {
         Intent i = new Intent(this, FileBrowserActivity.class);
         i.putExtra(FileBrowserActivity.EXTRA_MODE, mode);
         if (start != null) i.putExtra(FileBrowserActivity.EXTRA_START, start);
-        if (req == REQ_PICK_DIR) i.putExtra(FileBrowserActivity.EXTRA_TITLE, "Cartella con i PKG");
-        if (req == REQ_PICK_OUT) i.putExtra(FileBrowserActivity.EXTRA_TITLE, "Cartella di destinazione");
+        if (req == REQ_PICK_DIR) i.putExtra(FileBrowserActivity.EXTRA_TITLE, getString(R.string.browser_title_pkg_dir));
+        if (req == REQ_PICK_OUT) i.putExtra(FileBrowserActivity.EXTRA_TITLE, getString(R.string.browser_title_out));
         startActivityForResult(i, req);
     }
 
@@ -200,16 +196,14 @@ public class MainActivity extends Activity {
     }
 
     private void loadInfoSingle(File f) {
-        txtInfo.setText("Lettura header…");
+        txtInfo.setText(R.string.info_reading);
         new Thread(() -> {
             NativeLib.Meta m = NativeLib.meta(f.getAbsolutePath());
             ui.post(() -> {
                 if (!m.ok()) {
-                    txtInfo.setText("⚠ Non riesco ad aprire questo PKG:\n" + m.error);
+                    txtInfo.setText(getString(R.string.info_open_failed, m.error));
                 } else {
-                    txtInfo.setText("Title ID:  " + m.titleId
-                            + "\nDimensione:  " + Util.humanSize(m.size)
-                            + "\nFile:  " + m.fileCount);
+                    txtInfo.setText(getString(R.string.info_meta, m.titleId, Util.humanSize(m.size), m.fileCount));
                 }
                 updateUi();
             });
@@ -218,23 +212,23 @@ public class MainActivity extends Activity {
 
     private void scanDir(File dir) {
         inputs.clear();
-        txtSource.setText(dir.getAbsolutePath() + "  (cartella)");
-        txtInfo.setText("Cerco file .pkg…");
+        txtSource.setText(getString(R.string.source_folder, dir.getAbsolutePath()));
+        txtInfo.setText(R.string.scan_searching);
         new Thread(() -> {
             List<File> found = Util.findPkgs(dir);
             ui.post(() -> {
                 inputs.clear();
                 inputs.addAll(found);
                 if (found.isEmpty()) {
-                    txtInfo.setText("Nessun file .pkg trovato (anche nelle sottocartelle).");
+                    txtInfo.setText(R.string.scan_none);
                 } else {
-                    StringBuilder sb = new StringBuilder("Trovati " + found.size() + " PKG:\n");
+                    StringBuilder sb = new StringBuilder(getString(R.string.scan_found, found.size())).append('\n');
                     long total = 0;
                     for (File p : found) {
                         sb.append("• ").append(p.getName()).append("  (").append(Util.humanSize(p.length())).append(")\n");
                         total += p.length();
                     }
-                    sb.append("Totale: ").append(Util.humanSize(total));
+                    sb.append(getString(R.string.scan_total, Util.humanSize(total)));
                     txtInfo.setText(sb.toString());
                 }
                 updateUi();
@@ -253,8 +247,8 @@ public class MainActivity extends Activity {
         boolean sameDir = chkSameDir.isChecked();
         if (!sameDir && customOut == null) {
             new AlertDialog.Builder(this)
-                    .setMessage("Scegli prima una cartella di destinazione, oppure spunta \"stessa cartella del PKG\".")
-                    .setPositiveButton("OK", null).show();
+                    .setMessage(getString(R.string.dlg_need_out, getString(R.string.chk_same_dir)))
+                    .setPositiveButton(android.R.string.ok, null).show();
             return;
         }
         String[] paths = new String[inputs.size()];
@@ -266,7 +260,7 @@ public class MainActivity extends Activity {
         i.putExtra(ExtractService.EXTRA_INPUTS, paths);
         if (!sameDir) i.putExtra(ExtractService.EXTRA_OUT_BASE, customOut.getAbsolutePath());
         ExtractService.running = true; // reflect immediately in the UI
-        ExtractService.phase = "Avvio";
+        ExtractService.phase = getString(R.string.phase_starting);
         ExtractService.filesDone = 0;
         ExtractService.filesTotal = 0;
         startForegroundService(i);
@@ -278,12 +272,12 @@ public class MainActivity extends Activity {
         if (running) {
             int done = ExtractService.filesDone, total = ExtractService.filesTotal;
             String head = ExtractService.pkgCount > 1
-                    ? "PKG " + ExtractService.pkgIndex + "/" + ExtractService.pkgCount + " · " : "";
+                    ? getString(R.string.status_pkg_prefix, ExtractService.pkgIndex, ExtractService.pkgCount) : "";
             if (total > 0) {
                 progress.setIndeterminate(false);
                 progress.setMax(total);
                 progress.setProgress(done);
-                txtStatus.setText(head + done + " / " + total + " file");
+                txtStatus.setText(head + getString(R.string.status_files, done, total));
             } else {
                 progress.setIndeterminate(true);
                 txtStatus.setText(head + ExtractService.phase + "…");
@@ -311,13 +305,13 @@ public class MainActivity extends Activity {
         boolean sameDir = chkSameDir.isChecked();
         btnPickOut.setEnabled(!sameDir && !running);
         txtOut.setText(sameDir
-                ? "Ogni PKG viene estratto in <cartella del PKG>/<TITLE ID>"
-                : (customOut != null ? customOut.getAbsolutePath() + "/<TITLE ID>" : "Nessuna cartella scelta"));
+                ? getString(R.string.out_same_dir)
+                : (customOut != null ? customOut.getAbsolutePath() + "/<TITLE ID>" : getString(R.string.out_none)));
         btnPickFile.setEnabled(!running);
         btnPickDir.setEnabled(!running);
         chkSameDir.setEnabled(!running);
         btnExtract.setEnabled(!running && !inputs.isEmpty());
-        btnExtract.setText(running ? "Estrazione in corso…"
-                : (inputs.size() > 1 ? "Estrai " + inputs.size() + " PKG" : "Estrai"));
+        btnExtract.setText(running ? getString(R.string.btn_extracting)
+                : (inputs.size() > 1 ? getString(R.string.btn_extract_n, inputs.size()) : getString(R.string.btn_extract)));
     }
 }

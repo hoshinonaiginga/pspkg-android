@@ -94,10 +94,10 @@ jobs:
           # Remove the old pre-versioning "latest" release (signed with the retired key).
           gh release delete latest --yes --cleanup-tag || true
           cat > notes.md <<EOF
-          Basato su [ps4-pkg-tools](https://github.com/xXJSONDeruloXx/ps4-pkg-tools) di **xXJSONDeruloXx** e sul core PKG di [shadPS4](https://github.com/shadps4-emu/shadPS4). Grazie!
+          Based on [ps4-pkg-tools](https://github.com/xXJSONDeruloXx/ps4-pkg-tools) by **xXJSONDeruloXx** and the PKG core of [shadPS4](https://github.com/shadps4-emu/shadPS4). Thank you!
 
-          **Installazione:** scarica \`${APK_NAME}\` e aprilo sul telefono (Android 8.0+, arm64).
-          Puoi anche usare [Obtainium](https://github.com/ImranR98/Obtainium) con l'URL di questo repository per ricevere gli aggiornamenti in automatico.
+          **Install:** download \`${APK_NAME}\` and open it on your phone (Android 8.0+, arm64).
+          You can also add this repository's URL to [Obtainium](https://github.com/ImranR98/Obtainium) to get updates automatically.
           EOF
           gh release create "$GITHUB_REF_NAME" "dist/$APK_NAME" \
             --title "PS PKG Extractor $GITHUB_REF_NAME" \
