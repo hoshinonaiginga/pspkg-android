@@ -13,6 +13,8 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -85,6 +87,7 @@ public class MainActivity extends Activity {
         String lastOut = prefs.getString("last_out", null);
         if (lastOut != null) customOut = new File(lastOut);
         btnExtract.setOnClickListener(v -> startExtraction());
+        setupCredits();
 
         if (Build.VERSION.SDK_INT >= 33
                 && checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
@@ -104,6 +107,23 @@ public class MainActivity extends Activity {
     protected void onPause() {
         super.onPause();
         ui.removeCallbacks(poller);
+    }
+
+    private void setupCredits() {
+        String version = "";
+        try {
+            version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+        } catch (Exception ignored) {
+        }
+        TextView credits = findViewById(R.id.txt_credits);
+        credits.setText(Html.fromHtml(
+                "Basato su <a href=\"https://github.com/xXJSONDeruloXx/ps4-pkg-tools\">ps4-pkg-tools</a>"
+                        + " di <b>xXJSONDeruloXx</b> e sul core PKG di"
+                        + " <a href=\"https://github.com/shadps4-emu/shadPS4\">shadPS4</a>.<br>"
+                        + "Open source, GPL-2.0 · <a href=\"https://github.com/hoshinonaiginga/pspkg-android\">codice sorgente</a>"
+                        + (version.isEmpty() ? "" : " · v" + version),
+                Html.FROM_HTML_MODE_COMPACT));
+        credits.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     // ---------- Permissions ----------

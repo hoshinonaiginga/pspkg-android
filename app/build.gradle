@@ -2,6 +2,15 @@ plugins {
     id 'com.android.application'
 }
 
+// Release signing comes from the environment (GitHub secrets in CI), never from the repo.
+def ksPath = System.getenv('PSPKG_KEYSTORE')
+def ksPass = System.getenv('PSPKG_KEYSTORE_PASSWORD')
+def hasReleaseKey = ksPath && ksPass && file(ksPath).exists()
+
+// Version comes from the git tag in CI (v1.2.3 -> 1.2.3), with a dev fallback locally.
+def appVersionName = System.getenv('PSPKG_VERSION_NAME') ?: '0.0.0-dev'
+def appVersionCode = (System.getenv('PSPKG_VERSION_CODE') ?: '1') as int
+
 android {
     namespace 'io.github.hoshinonaiginga.pspkg'
     compileSdk 35
@@ -11,8 +20,8 @@ android {
         applicationId 'io.github.hoshinonaiginga.pspkg'
         minSdk 26
         targetSdk 34
-        versionCode 1
-        versionName '0.1.0'
+        versionCode appVersionCode
+        versionName appVersionName
 
         ndk {
             abiFilters 'arm64-v8a'
@@ -25,18 +34,20 @@ android {
     }
 
     signingConfigs {
-        release {
-            storeFile file('release.keystore')
-            storePassword 'pspkg-android'
-            keyAlias 'pspkg'
-            keyPassword 'pspkg-android'
+        if (hasReleaseKey) {
+            release {
+                storeFile file(ksPath)
+                storePassword ksPass
+                keyAlias System.getenv('PSPKG_KEY_ALIAS') ?: 'pspkg'
+                keyPassword ksPass
+            }
         }
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            signingConfig signingConfigs.release
+            signingConfig hasReleaseKey ? signingConfigs.release : signingConfigs.debug
         }
     }
 

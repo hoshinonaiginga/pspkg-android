@@ -1,8 +1,11 @@
 name: Build APK
 
+# - push on main / manual run: build + downloadable artifact (for testing)
+# - push of a tag vX.Y.Z: build signed with the release key + GitHub Release
 on:
   push:
     branches: [ main ]
+    tags: [ 'v*' ]
   workflow_dispatch:
 
 permissions:
@@ -26,6 +29,33 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      - name: Version from tag
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+            echo "PSPKG_VERSION_NAME=${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
+          else
+            echo "PSPKG_VERSION_NAME=0.0.0-dev.${GITHUB_RUN_NUMBER}+${GITHUB_SHA::7}" >> "$GITHUB_ENV"
+          fi
+          echo "PSPKG_VERSION_CODE=${GITHUB_RUN_NUMBER}" >> "$GITHUB_ENV"
+
+      - name: Release signing key (from secrets)
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ] && [ -n "$KEYSTORE_PASSWORD" ]; then
+            echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/release.keystore"
+            echo "PSPKG_KEYSTORE=$RUNNER_TEMP/release.keystore" >> "$GITHUB_ENV"
+            echo "PSPKG_KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD" >> "$GITHUB_ENV"
+            echo "Release key loaded."
+          else
+            echo "::warning::KEYSTORE_BASE64 / KEYSTORE_PASSWORD secrets missing: APK will be debug-signed."
+            if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+              echo "::error::A release tag needs the release signing key. Add the secrets and re-run."
+              exit 1
+            fi
+          fi
+
       - name: Build release APK
         run: |
           set -o pipefail
@@ -35,7 +65,7 @@ jobs:
         if: failure()
         run: |
           mkdir -p /tmp/logs && cp build.log /tmp/logs/build.log || true
-          find app/.cxx -name "*.log" -o -name "CMakeError.log" -o -name "CMakeOutput.log" 2>/dev/null | head -20 | while read f; do cp "$f" "/tmp/logs/$(echo $f | tr '/' '_')"; done || true
+          find app/.cxx -name "CMakeError.log" -o -name "CMakeOutput.log" 2>/dev/null | head -20 | while read f; do cp "$f" "/tmp/logs/$(echo $f | tr '/' '_')"; done || true
           cd /tmp/logs
           git init -q -b ci-logs
           git config user.name "ci"; git config user.email "ci@users.noreply.github.com"
@@ -45,22 +75,31 @@ jobs:
       - name: Collect APK
         run: |
           mkdir -p dist
-          cp app/build/outputs/apk/release/app-release.apk dist/PS-PKG-Extractor.apk
+          NAME="PS-PKG-Extractor-${PSPKG_VERSION_NAME%%+*}.apk"
+          cp app/build/outputs/apk/release/app-release.apk "dist/$NAME"
+          echo "APK_NAME=$NAME" >> "$GITHUB_ENV"
           ls -la dist
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: PS-PKG-Extractor-apk
-          path: dist/PS-PKG-Extractor.apk
+          name: ${{ env.APK_NAME }}
+          path: dist/${{ env.APK_NAME }}
 
-      - name: Publish "latest" release
-        if: github.ref == 'refs/heads/main'
+      - name: Publish GitHub Release (tags only)
+        if: startsWith(github.ref, 'refs/tags/v')
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          # Remove the old pre-versioning "latest" release (signed with the retired key).
           gh release delete latest --yes --cleanup-tag || true
-          gh release create latest dist/PS-PKG-Extractor.apk \
-            --title "Ultima build ($(date -u +%Y-%m-%d) · ${GITHUB_SHA::7})" \
-            --notes "Build automatica dal commit ${GITHUB_SHA}. Scarica PS-PKG-Extractor.apk e installalo sul telefono (arm64)." \
-            --prerelease --target "${GITHUB_SHA}"
+          cat > notes.md <<EOF
+          Basato su [ps4-pkg-tools](https://github.com/xXJSONDeruloXx/ps4-pkg-tools) di **xXJSONDeruloXx** e sul core PKG di [shadPS4](https://github.com/shadps4-emu/shadPS4). Grazie!
+
+          **Installazione:** scarica \`${APK_NAME}\` e aprilo sul telefono (Android 8.0+, arm64).
+          Puoi anche usare [Obtainium](https://github.com/ImranR98/Obtainium) con l'URL di questo repository per ricevere gli aggiornamenti in automatico.
+          EOF
+          gh release create "$GITHUB_REF_NAME" "dist/$APK_NAME" \
+            --title "PS PKG Extractor $GITHUB_REF_NAME" \
+            --notes-file notes.md \
+            --generate-notes
