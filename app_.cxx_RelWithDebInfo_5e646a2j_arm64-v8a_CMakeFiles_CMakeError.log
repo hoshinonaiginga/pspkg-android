@@ -1,0 +1,69 @@
+Checking whether the ASM compiler is GNU using "--version" did not match "(GNU assembler)|(GCC)|(Free Software Foundation)":
+Android (12470979, +pgo, +bolt, +lto, +mlgo, based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+Target: x86_64-unknown-linux-gnu
+Thread model: posix
+InstalledDir: /usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/bin
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/runner/work/pspkg-android/pspkg-android/app/.cxx/RelWithDebInfo/5e646a2j/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/local/lib/android/sdk/cmake/3.22.1/bin/ninja cmTC_28227 && [1/2] Building C object CMakeFiles/cmTC_28227.dir/src.c.o
+FAILED: CMakeFiles/cmTC_28227.dir/src.c.o 
+/usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android26 --sysroot=/usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/sysroot -DCMAKE_HAVE_LIBC_PTHREAD  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fPIE -MD -MT CMakeFiles/cmTC_28227.dir/src.c.o -MF CMakeFiles/cmTC_28227.dir/src.c.o.d -o CMakeFiles/cmTC_28227.dir/src.c.o -c /home/runner/work/pspkg-android/pspkg-android/app/.cxx/RelWithDebInfo/5e646a2j/arm64-v8a/CMakeFiles/CMakeTmp/src.c
+/home/runner/work/pspkg-android/pspkg-android/app/.cxx/RelWithDebInfo/5e646a2j/arm64-v8a/CMakeFiles/CMakeTmp/src.c:13:3: error: call to undeclared function 'pthread_cancel'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+   13 |   pthread_cancel(thread);
+      |   ^
+/home/runner/work/pspkg-android/pspkg-android/app/.cxx/RelWithDebInfo/5e646a2j/arm64-v8a/CMakeFiles/CMakeTmp/src.c:13:3: note: did you mean 'pthread_once'?
+/usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/pthread.h:264:5: note: 'pthread_once' declared here
+  264 | int pthread_once(pthread_once_t* _Nonnull __once, void (* _Nonnull __init_routine)(void));
+      |     ^
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/runner/work/pspkg-android/pspkg-android/app/.cxx/RelWithDebInfo/5e646a2j/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/local/lib/android/sdk/cmake/3.22.1/bin/ninja cmTC_b31e0 && [1/2] Building C object CMakeFiles/cmTC_b31e0.dir/CheckFunctionExists.c.o
+[2/2] Linking C executable cmTC_b31e0
+FAILED: cmTC_b31e0 
+: && /usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android26 --sysroot=/usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -DCHECK_FUNCTION_EXISTS=pthread_create -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments CMakeFiles/cmTC_b31e0.dir/CheckFunctionExists.c.o -o cmTC_b31e0  -lpthreads  -latomic -lm && :
+ld.lld: error: unable to find library -lpthreads
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+ninja: build stopped: subcommand failed.
+
+
+
+Determining if the function pthread_create exists in the pthread failed with the following output:
+Change Dir: /home/runner/work/pspkg-android/pspkg-android/app/.cxx/RelWithDebInfo/5e646a2j/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/local/lib/android/sdk/cmake/3.22.1/bin/ninja cmTC_d2556 && [1/2] Building C object CMakeFiles/cmTC_d2556.dir/CheckFunctionExists.c.o
+[2/2] Linking C executable cmTC_d2556
+FAILED: cmTC_d2556 
+: && /usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --target=aarch64-none-linux-android26 --sysroot=/usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -DCHECK_FUNCTION_EXISTS=pthread_create -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments CMakeFiles/cmTC_d2556.dir/CheckFunctionExists.c.o -o cmTC_d2556  -lpthread  -latomic -lm && :
+ld.lld: error: unable to find library -lpthread
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+ninja: build stopped: subcommand failed.
+
+
+

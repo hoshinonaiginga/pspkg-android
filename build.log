@@ -1,0 +1,441 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :app
+Checking the license for package NDK (Side by side) 27.2.12479018 in /usr/local/lib/android/sdk/licenses
+License for package NDK (Side by side) 27.2.12479018 accepted.
+Preparing "Install NDK (Side by side) 27.2.12479018 v.27.2.12479018".
+"Install NDK (Side by side) 27.2.12479018 v.27.2.12479018" ready.
+Installing NDK (Side by side) 27.2.12479018 in /usr/local/lib/android/sdk/ndk/27.2.12479018
+"Install NDK (Side by side) 27.2.12479018 v.27.2.12479018" complete.
+"Install NDK (Side by side) 27.2.12479018 v.27.2.12479018" finished.
+
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preReleaseBuild UP-TO-DATE
+
+> Task :app:configureCMakeRelWithDebInfo[arm64-v8a]
+Checking the license for package CMake 3.22.1 in /usr/local/lib/android/sdk/licenses
+License for package CMake 3.22.1 accepted.
+Preparing "Install CMake 3.22.1 v.3.22.1".
+"Install CMake 3.22.1 v.3.22.1" ready.
+Installing CMake 3.22.1 in /usr/local/lib/android/sdk/cmake/3.22.1
+"Install CMake 3.22.1 v.3.22.1" complete.
+"Install CMake 3.22.1 v.3.22.1" finished.
+C/C++: => Project : cryptopp-cmake v8.9.0
+C/C++: => Module : cryptopp
+
+> Task :app:buildCMakeRelWithDebInfo[arm64-v8a]
+C/C++: ninja: Entering directory `/home/runner/work/pspkg-android/pspkg-android/app/.cxx/RelWithDebInfo/5e646a2j/arm64-v8a'
+C/C++: /usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android26 --sysroot=/usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dpspkg_EXPORTS -I/home/runner/work/pspkg-android/pspkg-android/app/src/main/cpp/shim -I/home/runner/work/pspkg-android/pspkg-android/core/src -I/home/runner/work/pspkg-android/pspkg-android/core/externals -I/home/runner/work/pspkg-android/pspkg-android/core/externals/cryptopp -I/usr/local/lib/android/sdk/ndk/27.2.12479018/sources/android/cpufeatures -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O2 -g -DNDEBUG -fPIC -fexceptions -frtti -Wno-deprecated-declarations -std=gnu++2b -MD -MT CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp.o -MF CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp.o.d -o CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp.o -c /home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp
+C/C++: /home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:10:5: error: unknown type name 'z_stream'
+C/C++:    10 |     z_stream decompressStream;
+C/C++:       |     ^
+C/C++: /home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:11:31: error: use of undeclared identifier 'Z_NULL'
+C/C++:    11 |     decompressStream.zalloc = Z_NULL;
+C/C++:       |                               ^
+C/C++: /home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:12:30: error: use of undeclared identifier 'Z_NULL'
+C/C++:    12 |     decompressStream.zfree = Z_NULL;
+C/C++:       |                              ^
+C/C++: /home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:13:31: error: use of undeclared identifier 'Z_NULL'
+C/C++:    13 |     decompressStream.opaque = Z_NULL;
+C/C++:       |                               ^
+C/C++: /home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:15:43: error: use of undeclared identifier 'Z_OK'
+C/C++:    15 |     if (inflateInit(&decompressStream) != Z_OK) {
+C/C++:       |                                           ^
+C/C++: /home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:24:36: error: use of undeclared identifier 'Z_FINISH'
+C/C++:    24 |     if (inflate(&decompressStream, Z_FINISH)) {
+C/C++:       |                                    ^
+C/C++: /home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:26:42: error: use of undeclared identifier 'Z_OK'
+C/C++:    26 |     if (inflateEnd(&decompressStream) != Z_OK) {
+C/C++:       |                                          ^
+C/C++: 7 errors generated.
+
+> Task :app:buildCMakeRelWithDebInfo[arm64-v8a] FAILED
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run-1791898700719.json
+
+[Incubating] Problems report is available at: file:///home/runner/work/pspkg-android/pspkg-android/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:buildCMakeRelWithDebInfo[arm64-v8a]'.
+> com.android.ide.common.process.ProcessException: ninja: Entering directory `/home/runner/work/pspkg-android/pspkg-android/app/.cxx/RelWithDebInfo/5e646a2j/arm64-v8a'
+  [1/180] Building CXX object CMakeFiles/pspkg.dir/scm_rev.cpp.o
+  [2/180] Building C object CMakeFiles/cpufeatures.dir/usr/local/lib/android/sdk/ndk/27.2.12479018/sources/android/cpufeatures/cpu-features.c.o
+  [3/180] Linking C static library libcpufeatures.a
+  [4/180] Building CXX object CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg_type.cpp.o
+  [5/180] Building CXX object CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/common/io_file.cpp.o
+  [6/180] Building CXX object cryptopp/cryptopp/CMakeFiles/cryptopp.dir/home/runner/work/pspkg-android/pspkg-android/core/externals/cryptopp/lsh256.cpp.o
+  [7/180] Building CXX object CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp.o
+  FAILED: CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp.o 
+  /usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android26 --sysroot=/usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dpspkg_EXPORTS -I/home/runner/work/pspkg-android/pspkg-android/app/src/main/cpp/shim -I/home/runner/work/pspkg-android/pspkg-android/core/src -I/home/runner/work/pspkg-android/pspkg-android/core/externals -I/home/runner/work/pspkg-android/pspkg-android/core/externals/cryptopp -I/usr/local/lib/android/sdk/ndk/27.2.12479018/sources/android/cpufeatures -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O2 -g -DNDEBUG -fPIC -fexceptions -frtti -Wno-deprecated-declarations -std=gnu++2b -MD -MT CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp.o -MF CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp.o.d -o CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp.o -c /home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp
+  /home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:10:5: error: unknown type name 'z_stream'
+     10 |     z_stream decompressStream;
+        |     ^
+  /home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:11:31: error: use of undeclared identifier 'Z_NULL'
+     11 |     decompressStream.zalloc = Z_NULL;
+        |                               ^
+  /home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:12:30: error: use of undeclared identifier 'Z_NULL'
+     12 |     decompressStream.zfree = Z_NULL;
+        |                              ^
+  /home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:13:31: error: use of undeclared identifier 'Z_NULL'
+     13 |     decompressStream.opaque = Z_NULL;
+        |                               ^
+  /home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:15:43: error: use of undeclared identifier 'Z_OK'
+     15 |     if (inflateInit(&decompressStream) != Z_OK) {
+        |                                           ^
+  /home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:24:36: error: use of undeclared identifier 'Z_FINISH'
+     24 |     if (inflate(&decompressStream, Z_FINISH)) {
+        |                                    ^
+  /home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:26:42: error: use of undeclared identifier 'Z_OK'
+     26 |     if (inflateEnd(&decompressStream) != Z_OK) {
+        |                                          ^
+  7 errors generated.
+  [8/180] Building CXX object CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/pkg_tool/lib.cpp.o
+  [9/180] Building CXX object CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/crypto/crypto.cpp.o
+  ninja: build stopped: subcommand failed.
+  
+  C++ build system [build] failed while executing:
+      /usr/local/lib/android/sdk/cmake/3.22.1/bin/ninja \
+        -C \
+        /home/runner/work/pspkg-android/pspkg-android/app/.cxx/RelWithDebInfo/5e646a2j/arm64-v8a \
+        pspkg
+    from /home/runner/work/pspkg-android/pspkg-android/app
+
+* Try:
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+* Exception is:
+org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':app:buildCMakeRelWithDebInfo[arm64-v8a]'.
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.lambda$executeIfValid$1(ExecuteActionsTaskExecuter.java:130)
+	at org.gradle.internal.Try$Failure.ifSuccessfulOrElse(Try.java:293)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:128)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:116)
+	at org.gradle.api.internal.tasks.execution.ProblemsTaskPathTrackingTaskExecuter.execute(ProblemsTaskPathTrackingTaskExecuter.java:41)
+	at org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)
+	at org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)
+	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)
+	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:74)
+	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)
+	at org.gradle.execution.plan.LocalTaskNodeExecutor.execute(LocalTaskNodeExecutor.java:42)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:331)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:318)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.lambda$execute$0(DefaultTaskExecutionGraph.java:314)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:314)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:303)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
+	at org.gradle.execution.plan.DefaultPlanExecutor.process(DefaultPlanExecutor.java:111)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.executeWithServices(DefaultTaskExecutionGraph.java:138)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.execute(DefaultTaskExecutionGraph.java:123)
+	at org.gradle.execution.SelectedTaskExecutionAction.execute(SelectedTaskExecutionAction.java:35)
+	at org.gradle.execution.DryRunBuildExecutionAction.execute(DryRunBuildExecutionAction.java:51)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:54)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:43)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor.execute(BuildOperationFiringBuildWorkerExecutor.java:40)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$executeTasks$10(DefaultBuildLifecycleController.java:313)
+	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:266)
+	at org.gradle.internal.model.StateTransitionController.lambda$tryTransition$8(StateTransitionController.java:177)
+	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:46)
+	at org.gradle.internal.model.StateTransitionController.tryTransition(StateTransitionController.java:177)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.executeTasks(DefaultBuildLifecycleController.java:304)
+	at org.gradle.internal.build.DefaultBuildWorkGraphController$DefaultBuildWorkGraph.runWork(DefaultBuildWorkGraphController.java:220)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:263)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:127)
+	at org.gradle.composite.internal.DefaultBuildController.doRun(DefaultBuildController.java:181)
+	at org.gradle.composite.internal.DefaultBuildController.access$000(DefaultBuildController.java:50)
+	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.lambda$run$0(DefaultBuildController.java:198)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
+	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.run(DefaultBuildController.java:198)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:48)
+Caused by: org.gradle.internal.UncheckedException: com.android.ide.common.process.ProcessException: ninja: Entering directory `/home/runner/work/pspkg-android/pspkg-android/app/.cxx/RelWithDebInfo/5e646a2j/arm64-v8a'
+[1/180] Building CXX object CMakeFiles/pspkg.dir/scm_rev.cpp.o
+[2/180] Building C object CMakeFiles/cpufeatures.dir/usr/local/lib/android/sdk/ndk/27.2.12479018/sources/android/cpufeatures/cpu-features.c.o
+[3/180] Linking C static library libcpufeatures.a
+[4/180] Building CXX object CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg_type.cpp.o
+[5/180] Building CXX object CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/common/io_file.cpp.o
+[6/180] Building CXX object cryptopp/cryptopp/CMakeFiles/cryptopp.dir/home/runner/work/pspkg-android/pspkg-android/core/externals/cryptopp/lsh256.cpp.o
+[7/180] Building CXX object CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp.o
+FAILED: CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp.o 
+/usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android26 --sysroot=/usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dpspkg_EXPORTS -I/home/runner/work/pspkg-android/pspkg-android/app/src/main/cpp/shim -I/home/runner/work/pspkg-android/pspkg-android/core/src -I/home/runner/work/pspkg-android/pspkg-android/core/externals -I/home/runner/work/pspkg-android/pspkg-android/core/externals/cryptopp -I/usr/local/lib/android/sdk/ndk/27.2.12479018/sources/android/cpufeatures -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O2 -g -DNDEBUG -fPIC -fexceptions -frtti -Wno-deprecated-declarations -std=gnu++2b -MD -MT CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp.o -MF CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp.o.d -o CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp.o -c /home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp
+/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:10:5: error: unknown type name 'z_stream'
+   10 |     z_stream decompressStream;
+      |     ^
+/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:11:31: error: use of undeclared identifier 'Z_NULL'
+   11 |     decompressStream.zalloc = Z_NULL;
+      |                               ^
+/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:12:30: error: use of undeclared identifier 'Z_NULL'
+   12 |     decompressStream.zfree = Z_NULL;
+      |                              ^
+/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:13:31: error: use of undeclared identifier 'Z_NULL'
+   13 |     decompressStream.opaque = Z_NULL;
+      |                               ^
+/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:15:43: error: use of undeclared identifier 'Z_OK'
+   15 |     if (inflateInit(&decompressStream) != Z_OK) {
+      |                                           ^
+/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:24:36: error: use of undeclared identifier 'Z_FINISH'
+   24 |     if (inflate(&decompressStream, Z_FINISH)) {
+      |                                    ^
+/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:26:42: error: use of undeclared identifier 'Z_OK'
+   26 |     if (inflateEnd(&decompressStream) != Z_OK) {
+      |                                          ^
+7 errors generated.
+[8/180] Building CXX object CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/pkg_tool/lib.cpp.o
+[9/180] Building CXX object CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/crypto/crypto.cpp.o
+ninja: build stopped: subcommand failed.
+
+C++ build system [build] failed while executing:
+    /usr/local/lib/android/sdk/cmake/3.22.1/bin/ninja \
+      -C \
+      /home/runner/work/pspkg-android/pspkg-android/app/.cxx/RelWithDebInfo/5e646a2j/arm64-v8a \
+      pspkg
+  from /home/runner/work/pspkg-android/pspkg-android/app
+	at org.gradle.internal.UncheckedException.throwAsUncheckedException(UncheckedException.java:69)
+	at org.gradle.internal.UncheckedException.throwAsUncheckedException(UncheckedException.java:42)
+	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:128)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.doExecute(StandardTaskAction.java:58)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:51)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:29)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:244)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:30)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:27)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:48)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeAction(TaskExecution.java:229)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeActions(TaskExecution.java:212)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeWithPreviousOutputFiles(TaskExecution.java:195)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.execute(TaskExecution.java:162)
+	at org.gradle.internal.execution.steps.ExecuteStep.executeInternal(ExecuteStep.java:105)
+	at org.gradle.internal.execution.steps.ExecuteStep.access$000(ExecuteStep.java:44)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:59)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:56)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:56)
+	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:44)
+	at org.gradle.internal.execution.steps.CancelExecutionStep.execute(CancelExecutionStep.java:42)
+	at org.gradle.internal.execution.steps.TimeoutStep.executeWithoutTimeout(TimeoutStep.java:75)
+	at org.gradle.internal.execution.steps.TimeoutStep.execute(TimeoutStep.java:55)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:50)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:28)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.execute(RemovePreviousOutputsStep.java:67)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.execute(RemovePreviousOutputsStep.java:37)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:61)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:26)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:69)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:46)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.execute(ResolveInputChangesStep.java:40)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.execute(ResolveInputChangesStep.java:29)
+	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache(BuildCacheStep.java:189)
+	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$1(BuildCacheStep.java:75)
+	at org.gradle.internal.Either$Right.fold(Either.java:175)
+	at org.gradle.internal.execution.caching.CachingState.fold(CachingState.java:62)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:73)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:48)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.execute(StoreExecutionStateStep.java:46)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.execute(StoreExecutionStateStep.java:35)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.executeBecause(SkipUpToDateStep.java:75)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.lambda$execute$2(SkipUpToDateStep.java:53)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:53)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:35)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:37)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:27)
+	at org.gradle.internal.execution.steps.ResolveIncrementalCachingStateStep.executeDelegate(ResolveIncrementalCachingStateStep.java:49)
+	at org.gradle.internal.execution.steps.ResolveIncrementalCachingStateStep.executeDelegate(ResolveIncrementalCachingStateStep.java:27)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:71)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:39)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.execute(ResolveChangesStep.java:65)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.execute(ResolveChangesStep.java:36)
+	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:107)
+	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:56)
+	at org.gradle.internal.execution.steps.AbstractCaptureStateBeforeExecutionStep.execute(AbstractCaptureStateBeforeExecutionStep.java:64)
+	at org.gradle.internal.execution.steps.AbstractCaptureStateBeforeExecutionStep.execute(AbstractCaptureStateBeforeExecutionStep.java:43)
+	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.executeWithNonEmptySources(AbstractSkipEmptyWorkStep.java:125)
+	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.execute(AbstractSkipEmptyWorkStep.java:56)
+	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.execute(AbstractSkipEmptyWorkStep.java:36)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute(MarkSnapshottingInputsStartedStep.java:38)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.execute(LoadPreviousExecutionStateStep.java:36)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.execute(LoadPreviousExecutionStateStep.java:23)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.execute(HandleStaleOutputsStep.java:75)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.execute(HandleStaleOutputsStep.java:41)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.lambda$execute$0(AssignMutableWorkspaceStep.java:35)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$4.withWorkspace(TaskExecution.java:289)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.execute(AssignMutableWorkspaceStep.java:31)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.execute(AssignMutableWorkspaceStep.java:22)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:40)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:23)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.lambda$execute$2(ExecuteWorkBuildOperationFiringStep.java:67)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:67)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:39)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:46)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:34)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:48)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:35)
+	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:64)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:127)
+	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:116)
+	at org.gradle.api.internal.tasks.execution.ProblemsTaskPathTrackingTaskExecuter.execute(ProblemsTaskPathTrackingTaskExecuter.java:41)
+	at org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)
+	at org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)
+	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)
+	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:74)
+	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)
+	at org.gradle.execution.plan.LocalTaskNodeExecutor.execute(LocalTaskNodeExecutor.java:42)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:331)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:318)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.lambda$execute$0(DefaultTaskExecutionGraph.java:314)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:314)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:303)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
+	at org.gradle.execution.plan.DefaultPlanExecutor.process(DefaultPlanExecutor.java:111)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.executeWithServices(DefaultTaskExecutionGraph.java:138)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.execute(DefaultTaskExecutionGraph.java:123)
+	at org.gradle.execution.SelectedTaskExecutionAction.execute(SelectedTaskExecutionAction.java:35)
+	at org.gradle.execution.DryRunBuildExecutionAction.execute(DryRunBuildExecutionAction.java:51)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:54)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:43)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor.execute(BuildOperationFiringBuildWorkerExecutor.java:40)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$executeTasks$10(DefaultBuildLifecycleController.java:313)
+	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:266)
+	at org.gradle.internal.model.StateTransitionController.lambda$tryTransition$8(StateTransitionController.java:177)
+	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:46)
+	at org.gradle.internal.model.StateTransitionController.tryTransition(StateTransitionController.java:177)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.executeTasks(DefaultBuildLifecycleController.java:304)
+	at org.gradle.internal.build.DefaultBuildWorkGraphController$DefaultBuildWorkGraph.runWork(DefaultBuildWorkGraphController.java:220)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:263)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:127)
+	at org.gradle.composite.internal.DefaultBuildController.doRun(DefaultBuildController.java:181)
+	at org.gradle.composite.internal.DefaultBuildController.access$000(DefaultBuildController.java:50)
+	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.lambda$run$0(DefaultBuildController.java:198)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
+	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.run(DefaultBuildController.java:198)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:48)
+Caused by: com.android.ide.common.process.ProcessException: ninja: Entering directory `/home/runner/work/pspkg-android/pspkg-android/app/.cxx/RelWithDebInfo/5e646a2j/arm64-v8a'
+[1/180] Building CXX object CMakeFiles/pspkg.dir/scm_rev.cpp.o
+[2/180] Building C object CMakeFiles/cpufeatures.dir/usr/local/lib/android/sdk/ndk/27.2.12479018/sources/android/cpufeatures/cpu-features.c.o
+[3/180] Linking C static library libcpufeatures.a
+[4/180] Building CXX object CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg_type.cpp.o
+[5/180] Building CXX object CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/common/io_file.cpp.o
+[6/180] Building CXX object cryptopp/cryptopp/CMakeFiles/cryptopp.dir/home/runner/work/pspkg-android/pspkg-android/core/externals/cryptopp/lsh256.cpp.o
+[7/180] Building CXX object CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp.o
+FAILED: CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp.o 
+/usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=aarch64-none-linux-android26 --sysroot=/usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dpspkg_EXPORTS -I/home/runner/work/pspkg-android/pspkg-android/app/src/main/cpp/shim -I/home/runner/work/pspkg-android/pspkg-android/core/src -I/home/runner/work/pspkg-android/pspkg-android/core/externals -I/home/runner/work/pspkg-android/pspkg-android/core/externals/cryptopp -I/usr/local/lib/android/sdk/ndk/27.2.12479018/sources/android/cpufeatures -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -O2 -g -DNDEBUG -fPIC -fexceptions -frtti -Wno-deprecated-declarations -std=gnu++2b -MD -MT CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp.o -MF CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp.o.d -o CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp.o -c /home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp
+/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:10:5: error: unknown type name 'z_stream'
+   10 |     z_stream decompressStream;
+      |     ^
+/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:11:31: error: use of undeclared identifier 'Z_NULL'
+   11 |     decompressStream.zalloc = Z_NULL;
+      |                               ^
+/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:12:30: error: use of undeclared identifier 'Z_NULL'
+   12 |     decompressStream.zfree = Z_NULL;
+      |                              ^
+/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:13:31: error: use of undeclared identifier 'Z_NULL'
+   13 |     decompressStream.opaque = Z_NULL;
+      |                               ^
+/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:15:43: error: use of undeclared identifier 'Z_OK'
+   15 |     if (inflateInit(&decompressStream) != Z_OK) {
+      |                                           ^
+/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:24:36: error: use of undeclared identifier 'Z_FINISH'
+   24 |     if (inflate(&decompressStream, Z_FINISH)) {
+      |                                    ^
+/home/runner/work/pspkg-android/pspkg-android/core/src/core/file_format/pkg.cpp:26:42: error: use of undeclared identifier 'Z_OK'
+   26 |     if (inflateEnd(&decompressStream) != Z_OK) {
+      |                                          ^
+7 errors generated.
+[8/180] Building CXX object CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/pkg_tool/lib.cpp.o
+[9/180] Building CXX object CMakeFiles/pspkg.dir/home/runner/work/pspkg-android/pspkg-android/core/src/core/crypto/crypto.cpp.o
+ninja: build stopped: subcommand failed.
+
+C++ build system [build] failed while executing:
+    /usr/local/lib/android/sdk/cmake/3.22.1/bin/ninja \
+      -C \
+      /home/runner/work/pspkg-android/pspkg-android/app/.cxx/RelWithDebInfo/5e646a2j/arm64-v8a \
+      pspkg
+  from /home/runner/work/pspkg-android/pspkg-android/app
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.execute(ExecuteProcess.kt:288)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt$executeProcess$1.invoke(ExecuteProcess.kt:108)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt$executeProcess$1.invoke(ExecuteProcess.kt:106)
+	at com.android.build.gradle.internal.cxx.timing.TimingEnvironmentKt.time(TimingEnvironment.kt:32)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.executeProcess(ExecuteProcess.kt:106)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.executeProcess$default(ExecuteProcess.kt:85)
+	at com.android.build.gradle.internal.cxx.build.CxxRegularBuilder.executeProcessBatch(CxxRegularBuilder.kt:332)
+	at com.android.build.gradle.internal.cxx.build.CxxRegularBuilder.build(CxxRegularBuilder.kt:129)
+	at com.android.build.gradle.tasks.ExternalNativeBuildTask.doTaskAction(ExternalNativeBuildTask.kt:72)
+	at com.android.build.gradle.internal.tasks.UnsafeOutputsTask$taskAction$$inlined$recordTaskAction$1.invoke(BaseTask.kt:78)
+	at com.android.build.gradle.internal.tasks.Blocks.recordSpan(Blocks.java:51)
+	at com.android.build.gradle.internal.tasks.UnsafeOutputsTask.taskAction(UnsafeOutputsTask.kt:81)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:125)
+	... 146 more
+Caused by: com.android.ide.common.process.ProcessException: Error while executing process /usr/local/lib/android/sdk/cmake/3.22.1/bin/ninja with arguments {-C /home/runner/work/pspkg-android/pspkg-android/app/.cxx/RelWithDebInfo/5e646a2j/arm64-v8a pspkg}
+	at com.android.build.gradle.internal.process.GradleProcessResult.buildProcessException(GradleProcessResult.java:73)
+	at com.android.build.gradle.internal.process.GradleProcessResult.assertNormalExitValue(GradleProcessResult.java:48)
+	at com.android.build.gradle.internal.cxx.process.ExecuteProcessKt.execute(ExecuteProcess.kt:277)
+	... 161 more
+Caused by: org.gradle.process.internal.ExecException: Process 'command '/usr/local/lib/android/sdk/cmake/3.22.1/bin/ninja'' finished with non-zero exit value 1
+	at org.gradle.process.internal.DefaultExecHandle$ExecResultImpl.assertNormalExitValue(DefaultExecHandle.java:442)
+	at com.android.build.gradle.internal.process.GradleProcessResult.assertNormalExitValue(GradleProcessResult.java:46)
+	... 162 more
+
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 43s
+2 actionable tasks: 2 executed
