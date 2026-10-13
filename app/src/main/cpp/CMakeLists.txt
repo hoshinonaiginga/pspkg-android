@@ -24,7 +24,8 @@ set(CRYPTOPP_BUILD_DOCUMENTATION OFF CACHE BOOL "" FORCE)
 set(CRYPTOPP_INSTALL OFF CACHE BOOL "" FORCE)
 set(CRYPTOPP_SOURCES "${CORE_DIR}/externals/cryptopp")
 add_subdirectory("${CORE_DIR}/externals/cryptopp-cmake" cryptopp EXCLUDE_FROM_ALL)
-target_link_libraries(cryptopp PUBLIC cpufeatures)
+# plain signature: cryptopp-cmake uses the plain form on this target
+target_link_libraries(cryptopp cpufeatures)
 
 # --- Configure scm_rev.cpp (version info used by the core) ---
 set(EMULATOR_VERSION_MAJOR "0")
