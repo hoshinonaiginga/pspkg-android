@@ -8,10 +8,21 @@ Extract and decrypt PS4 `.pkg` files (sce_sys, PFS file system, full directory t
 All of the PKG extraction and decryption logic comes from that work, which carved the PKG core out of the shadPS4 emulator into a clean, standalone library. This app is "just" the Android port: it builds that core with the NDK and puts a mobile UI on top. Without it, this would have taken days more work.
 
 Thanks also to:
+
 - **[shadPS4](https://github.com/shadps4-emu/shadPS4)**, the PS4 emulator team behind the original PKG/PFS reading and decryption code.
 - **[Crypto++](https://github.com/weidai11/cryptopp)** (Wei Dai and contributors) for the cryptography, and **zlib** for decompression.
 
 If this app is useful to you, please leave a ⭐ on [ps4-pkg-tools](https://github.com/xXJSONDeruloXx/ps4-pkg-tools) too.
+
+## Screenshots
+
+<p align="center">
+  <img src="docs/screenshots/1-ready.jpg" width="250" alt="PKG selected, ready to extract">
+  &nbsp;
+  <img src="docs/screenshots/2-extracting.jpg" width="250" alt="Extraction in progress">
+  &nbsp;
+  <img src="docs/screenshots/3-done.jpg" width="250" alt="Extraction complete">
+</p>
 
 ## Download
 
