@@ -30,7 +30,7 @@ Grab the APK from the latest [release](../../releases) (`PS-PKG-Extractor-<versi
 
 The first phase ("Decrypting PFS and reading index") has no percentage. The file counter starts once the actual file extraction begins.
 
-The UI is in English, with an Italian translation that is used automatically when the system language is Italian. Translations for other languages are welcome: just add a `values-<lang>/strings.xml`.
+The UI is in English, with an Italian translation that is used automatically when the system language is Italian. On Android 13+ you can also pick the app language on its own in Settings → Apps → PS PKG Extractor → Language. Translations for other languages are welcome: just add a `values-<lang>/strings.xml`.
 
 ## Disclaimer
 

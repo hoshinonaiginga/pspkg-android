@@ -63,6 +63,12 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
 
+    // Declares the app's languages so Android 13+ shows a per-app language picker
+    // (Settings > Apps > PS PKG Extractor > Language).
+    androidResources {
+        generateLocaleConfig true
+    }
+
     lint {
         checkReleaseBuilds false
         abortOnError false
