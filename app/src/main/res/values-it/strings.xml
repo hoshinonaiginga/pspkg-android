@@ -16,7 +16,7 @@
     <string name="out_none">Nessuna cartella scelta</string>
     <string name="info_reading">Lettura header…</string>
     <string name="info_open_failed">⚠ Non riesco ad aprire questo PKG:\n%1$s</string>
-    <string name="info_meta">Title ID:  %1$s\nDimensione:  %2$s\nFile:  %3$d</string>
+    <string name="info_meta">Title ID:  %1$s\nDimensione:  %2$s</string>
     <string name="source_folder">%1$s  (cartella)</string>
     <string name="scan_searching">Cerco file .pkg…</string>
     <string name="scan_none">Nessun file .pkg trovato (anche nelle sottocartelle).</string>
@@ -45,10 +45,10 @@
     <string name="phase_decrypt">Decrittazione PFS e lettura indice</string>
     <string name="phase_extract">Estrazione file</string>
     <string name="log_open_failed">"  ✗ Impossibile aprire: %1$s"</string>
-    <string name="log_meta">"  Title ID: %1$s · %2$s · %3$d file"</string>
+    <string name="log_meta">"  Title ID: %1$s · %2$s"</string>
     <string name="log_dest">"  Destinazione: %1$s"</string>
     <string name="log_error">"  ✗ Errore: %1$s"</string>
-    <string name="log_done">"  ✓ Completato"</string>
+    <string name="log_done">"  ✓ Completato · %1$d file"</string>
     <string name="log_summary">— %1$s in %2$dm %3$ds</string>
     <string name="summary_ok">Estrazione completata</string>
     <string name="summary_fail">Estrazione fallita</string>

@@ -88,6 +88,7 @@ public class MainActivity extends Activity {
         if (lastOut != null) customOut = new File(lastOut);
         btnExtract.setOnClickListener(v -> startExtraction());
         setupCredits();
+        restoreState(savedInstanceState);
 
         if (Build.VERSION.SDK_INT >= 33
                 && checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
@@ -107,6 +108,30 @@ public class MainActivity extends Activity {
     protected void onPause() {
         super.onPause();
         ui.removeCallbacks(poller);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle out) {
+        super.onSaveInstanceState(out);
+        String[] paths = new String[inputs.size()];
+        for (int i = 0; i < inputs.size(); i++) paths[i] = inputs.get(i).getAbsolutePath();
+        out.putStringArray("inputs", paths);
+        out.putCharSequence("source", txtSource.getText());
+        out.putCharSequence("info", txtInfo.getText());
+    }
+
+    private void restoreState(Bundle saved) {
+        if (saved != null) {
+            String[] paths = saved.getStringArray("inputs");
+            if (paths != null) for (String p : paths) inputs.add(new File(p));
+            CharSequence src = saved.getCharSequence("source");
+            CharSequence info = saved.getCharSequence("info");
+            if (src != null) txtSource.setText(src);
+            if (info != null) txtInfo.setText(info);
+        } else if (ExtractService.running && !ExtractService.jobSource.isEmpty()) {
+            // Reopened from scratch while a job is still running: show what is being extracted.
+            txtSource.setText(ExtractService.jobSource);
+        }
     }
 
     private void setupCredits() {
@@ -203,7 +228,7 @@ public class MainActivity extends Activity {
                 if (!m.ok()) {
                     txtInfo.setText(getString(R.string.info_open_failed, m.error));
                 } else {
-                    txtInfo.setText(getString(R.string.info_meta, m.titleId, Util.humanSize(m.size), m.fileCount));
+                    txtInfo.setText(getString(R.string.info_meta, m.titleId, Util.humanSize(m.size)));
                 }
                 updateUi();
             });
@@ -255,6 +280,7 @@ public class MainActivity extends Activity {
         for (int i = 0; i < inputs.size(); i++) paths[i] = inputs.get(i).getAbsolutePath();
 
         ExtractService.clearLog();
+        ExtractService.jobSource = txtSource.getText().toString();
         lastLog = "";
         Intent i = new Intent(this, ExtractService.class);
         i.putExtra(ExtractService.EXTRA_INPUTS, paths);

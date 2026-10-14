@@ -19,7 +19,7 @@
     <string name="out_none">No folder chosen</string>
     <string name="info_reading">Reading header…</string>
     <string name="info_open_failed">⚠ Can\'t open this PKG:\n%1$s</string>
-    <string name="info_meta">Title ID:  %1$s\nSize:  %2$s\nFiles:  %3$d</string>
+    <string name="info_meta">Title ID:  %1$s\nSize:  %2$s</string>
     <string name="source_folder">%1$s  (folder)</string>
     <string name="scan_searching">Looking for .pkg files…</string>
     <string name="scan_none">No .pkg files found (subfolders included).</string>
@@ -51,10 +51,10 @@
     <string name="phase_decrypt">Decrypting PFS and reading index</string>
     <string name="phase_extract">Extracting files</string>
     <string name="log_open_failed">"  ✗ Can't open: %1$s"</string>
-    <string name="log_meta">"  Title ID: %1$s · %2$s · %3$d files"</string>
+    <string name="log_meta">"  Title ID: %1$s · %2$s"</string>
     <string name="log_dest">"  Destination: %1$s"</string>
     <string name="log_error">"  ✗ Error: %1$s"</string>
-    <string name="log_done">"  ✓ Done"</string>
+    <string name="log_done">"  ✓ Done · %1$d files"</string>
     <string name="log_summary">— %1$s in %2$dm %3$ds</string>
     <string name="summary_ok">Extraction complete</string>
     <string name="summary_fail">Extraction failed</string>

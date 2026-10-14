@@ -31,6 +31,7 @@ public class ExtractService extends Service {
     // ---- Status shared with the UI ----
     public static volatile boolean running = false;
     public static volatile String currentName = "";
+    public static volatile String jobSource = ""; // what the user picked, shown again if the UI is recreated
     public static volatile String phase = "";
     public static volatile int pkgIndex = 0;
     public static volatile int pkgCount = 0;
@@ -125,7 +126,7 @@ public class ExtractService extends Service {
             }
             File base = outBase != null ? new File(outBase) : pkg.getParentFile();
             File out = Util.outputDirFor(base, meta.titleId);
-            log(getString(R.string.log_meta, meta.titleId, Util.humanSize(meta.size), meta.fileCount));
+            log(getString(R.string.log_meta, meta.titleId, Util.humanSize(meta.size)));
             log(getString(R.string.log_dest, out.getAbsolutePath()));
 
             phase = getString(R.string.phase_decrypt);
@@ -145,7 +146,7 @@ public class ExtractService extends Service {
                 log(getString(R.string.log_error, err));
                 failed++;
             } else {
-                log(getString(R.string.log_done));
+                log(getString(R.string.log_done, filesTotal));
                 ok++;
             }
         }
