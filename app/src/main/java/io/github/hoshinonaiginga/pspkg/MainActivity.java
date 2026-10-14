@@ -128,8 +128,9 @@ public class MainActivity extends Activity {
             CharSequence info = saved.getCharSequence("info");
             if (src != null) txtSource.setText(src);
             if (info != null) txtInfo.setText(info);
-        } else if (ExtractService.running && !ExtractService.jobSource.isEmpty()) {
-            // Reopened from scratch while a job is still running: show what is being extracted.
+        } else if (!ExtractService.jobSource.isEmpty()) {
+            // Reopened from scratch while a job is running (or just finished):
+            // show what is being / was extracted instead of "No PKG selected".
             txtSource.setText(ExtractService.jobSource);
         }
     }
